@@ -1,0 +1,1 @@
+download the folder, then in terminal (on vs code) type npm start.
