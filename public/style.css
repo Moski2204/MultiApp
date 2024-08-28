@@ -1,0 +1,53 @@
+/* Navigation bar */
+* {
+  list-style: none;
+  text-decoration: none;
+
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+  background: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation a {
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+.navigation a li {
+  color: white;
+  font-family: "Inter Tight";
+  font-size: 25px;
+  font-weight: bold;
+}
+
+
+.navigation a li:hover {
+  color: yellow;
+  text-decoration: none;
+}
+
+.avatar{
+  width: 65%;
+}
