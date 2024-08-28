@@ -15,12 +15,12 @@ router.get("/", authController.isLoggedIn, (req, res) => { //this is a route, wh
 
 //to able to access the register page do this
 router.get("/register", (req, res) => {
-  res.render("register") //this is to render the register.hbs file
+  res.render("register") //this is to render the register.ejs file
 });
 
 //to able to access the login page do this
 router.get("/login", (req, res) => {
-  res.render("login") //this is to render the login.hbs file
+  res.render("login") //this is to render the login.ejs file
 });
 
 //to able to access the profile page do this
@@ -36,12 +36,12 @@ router.get("/profile", authController.isLoggedIn, (req, res) => {
   if (req.user){
     res.render("profile", {
       user: req.user
-    }) //this is to render profile.hbs file
+    }) //this is to render profile.ejs file
   }
   else{
     res.redirect("/login")
   }
-  res.render("profile") //this is to render profile.hbs file
+  res.render("profile") //this is to render profile.ejs file
 });
 
 // Ensure user is logged in before accessing the gym page
@@ -67,9 +67,9 @@ router.get("/gym", authController.isLoggedIn, (req, res) => {
 });
 
 
-router.get("/tracker", authController.isLoggedIn, (req, res) => {
+router.get("/finance", authController.isLoggedIn, (req, res) => {
   if (req.user){
-    res.render("tracker", {  //this is to render tracker.hbs file
+    res.render("finance", {  //this is to render finance.ejs file
       user: req.user
   })
   }
