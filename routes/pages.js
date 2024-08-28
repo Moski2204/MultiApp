@@ -10,7 +10,7 @@ router.get("/", authController.isLoggedIn, (req, res) => { //this is a route, wh
   //res is the response object, which contains methods for sending what you want to the client (to the front end)
   res.render("index", {
     user: req.user
-  }) //this is to render the index.hbs file (to output the HTML in that file)
+  }) //this is to render the index.ejs file (to output the HTML in that file)
 });
 
 //to able to access the register page do this
@@ -41,7 +41,6 @@ router.get("/profile", authController.isLoggedIn, (req, res) => {
   else{
     res.redirect("/login")
   }
-  res.render("profile") //this is to render profile.ejs file
 });
 
 // Ensure user is logged in before accessing the gym page
