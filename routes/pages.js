@@ -61,20 +61,20 @@ router.get("/gym", authController.isLoggedIn, (req, res) => {
       });
     });
   } else {
-    res.redirect("/login");
+    res.redirect("/register");
   }
 });
 
-
+/* to render the finance page if it was in ejs
 router.get("/finance", authController.isLoggedIn, (req, res) => {
   if (req.user){
     res.render("finance", {  //this is to render finance.ejs file
-      user: req.user
+  
   })
   }
   else{
-    res.redirect("/login")
+    res.redirect("/register")
   }
 });
-
+*/
 module.exports = router; //this is to make sure we can use the routes in other files, we need to export em that's what we doing in this line

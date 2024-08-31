@@ -30,10 +30,13 @@ app.use(express.json()); //this is to make sure that the values that we grab fro
 
 app.use(cookieParser()); //this is to make sure we can set up cookies in our browser
 
+//to render the html page
+app.get("/finance", (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'finance.html'));
+})
 
 //telling nodejs what "view engine" we wanna use to show the HTML
 app.set("view engine", "ejs"); //this is to make sure we can use the ejs templating engine
-
 
 //Now CONNECTING to the database 
 db.connect( (error) =>{
