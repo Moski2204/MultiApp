@@ -201,11 +201,3 @@ exports.gym = (req, res) => {
         res.redirect('/gym');
     });
 }
-
-//Function to make finances functional
-let expenses = []; //array to store expenses
-let totalAmount = 0; //total amount of expenses
-
-exports.finance = (req, res) => {
-
-}
