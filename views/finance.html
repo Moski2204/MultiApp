@@ -44,6 +44,10 @@
     .expenses-list {
       margin: 20px;
     }
+
+    .income-list{
+      margin: 20px;
+    }
     
     table {
       width: 100%;
@@ -80,156 +84,224 @@
 </head>
 <body>
   <h1 style="text-align: center;">Personal Finance Statement</h1>
-
- <div class="input-section">
-  <label for="category-select">Category:</label>
-  <select name="category-select" id="category-select">
-    <option value="Fast Food">Fast Food</option>
-    <option value="Grocery">Grocery</option>
-    <option value="Bills">Bills</option>
-    <option value="Games">Games</option>
-  </select>
-  <label for="amount-input">Amount:</label>
-  <input type="number" id="amount-input">
-  <label for="date-input">Date:</label>
-  <input type="date" id="date-input">
-  <button id="add-btn">Add</button>
- </div>
-
  
- <!-- Income List-->
- <div class="income-list">
-  <h2>Personal Income</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody id="income-table-body">
+  <!-- Income List -->
+  <div class="income-list">
+    <h2>Personal Income</h2>
+    <div class="input-section">
+      <label for="category-select-income">Category:</label>
+      <select id="category-select-income">
+        <option value="Salary">Salary</option>
+        <option value="Stocks">Stocks</option>
+        <option value="Investments">Investments</option>
+      </select>
+      <label for="amount-input-income">Amount:</label>
+      <input type="number" id="amount-input-income">
+      <label for="date-input-income">Date:</label>
+      <input type="date" id="date-input-income">
+      <button id="add-btn-income">Add</button>
+    </div>
 
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>Total:</td>
-        <td id="total-amount"></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tfoot>
-  </table>
- </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="income-table-body">
+        <!-- Income rows will be dynamically added here -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total Income:</td>
+          <td id="total-income"></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 
- <!-- Expense list -->
- <div class="expenses-list">
+  <br>
+
+  <!-- Expenses List -->
   <h2>Personal Expenses</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody id="expense-table-body">
+  <div class="input-section">
+    <label for="category-select-expense">Category:</label>
+    <select id="category-select-expense">
+      <option value="Fast Food">Fast Food</option>
+      <option value="Grocery">Grocery</option>
+      <option value="Bills">Bills</option>
+      <option value="Games">Games</option>
+    </select>
+    <label for="amount-input-expense">Amount:</label>
+    <input type="number" id="amount-input-expense">
+    <label for="date-input-expense">Date:</label>
+    <input type="date" id="date-input-expense">
+    <button id="add-btn-expense">Add</button>
+  </div>
 
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>Total:</td>
-        <td id="total-amount"></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tfoot>
-  </table>
- </div>
+  <div class="expenses-list">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="expense-table-body">
+        <!-- Expense rows will be dynamically added here -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total Expenses:</td>
+          <td id="total-expense"></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 
+  <h1 id="profit">Profit: </h1>
 
- <script>
-  //Expense:
-  let expenses = []; //Array to store the expenses added by the user
-  let totalAmount = 0; //Variable to store the total amount of all expenses
-  
-  //Getting references to the DOM elements for user input and output
-  const categorySelect = document.getElementById('category-select'); //Category dropdown
-  const amountInput = document.getElementById('amount-input'); //Input field for amount
-  const dateInput = document.getElementById('date-input'); //Input field for date
-  const addBtn = document.getElementById('add-btn'); //Button to add a new expense
-  const expensesTableBody = document.getElementById('expense-table-body'); //Body of the table to display expenses
-  const totalAmountCell = document.getElementById('total-amount'); //Cell to display the total amount
-  
-  //Adding an event listener to the "add" button
-  addBtn.addEventListener('click', function() {
-      const category = categorySelect.value; //Get the selected category from the dropdown
-      const amount = Number(amountInput.value); //Get the amount input and convert it to a number
-      const date = dateInput.value; //Get the selected date
-  
-      //Validate user input for each field
-      if (category === '') {
-          alert('Please select a category'); //Alert if no category is selected
-          return;
+  <script>
+    // Expense Section
+    let expenses = []; //Array to store the expenses added by the user
+    let totalExpense = 0; //Variable to store the total amount of all expenses
+
+    //Getting references to the DOM elements for user input and output
+    const categorySelectExpense = document.getElementById('category-select-expense'); //Category dropdown
+    const amountInputExpense = document.getElementById('amount-input-expense'); //Input field for amount
+    const dateInputExpense = document.getElementById('date-input-expense'); //Input field for date
+    const addBtnExpense = document.getElementById('add-btn-expense'); //Button to add a new expense
+    const expensesTableBody = document.getElementById('expense-table-body'); //Body of the table to display expenses
+    const totalExpenseCell = document.getElementById('total-expense');  //Cell to display the total amount
+
+    //Adding an event listener to the "add" button
+    addBtnExpense.addEventListener('click', function() {
+      const category = categorySelectExpense.value;  //Get the selected category from the dropdown
+      const amount = Number(amountInputExpense.value); //Get the amount input and convert it to a number
+      const date = dateInputExpense.value; //Get the selected date
+
+        //Validate user input for each field
+      if (category === '' || isNaN(amount) || amount <= 0 || date === '') {
+        alert('Please fill out all fields with valid values.'); //Alert 
+        return;
       }
-      if (isNaN(amount) || amount <= 0) {
-          alert('Please enter a valid amount'); //Alert if the amount is not a number or less than or equal to 0
-          return;
-      }
-      if (date === '') {
-          alert('Please select a date'); //Alert if no date is selected
-          return;
-      }
-  
+
       //Create an expense object and add it to the expenses array
       const expense = { category, amount, date };
       expenses.push(expense); //Push the expense object into the expenses array
-  
+      
       //Update the total amount
-      totalAmount += amount;
-      totalAmountCell.textContent = totalAmount; //Update the total amount cell in the table
-  
+      totalExpense += amount;
+      totalExpenseCell.textContent = totalExpense.toFixed(2); //Update the total amount cell in the table, to point two decimal places
+
       //Insert a new row in the expenses table
       const newRow = expensesTableBody.insertRow();
-  
+
       //Insert cells in the new row
-      const categoryCell = newRow.insertCell(); 
+      const categoryCell = newRow.insertCell();
       const amountCell = newRow.insertCell();
       const dateCell = newRow.insertCell();
       const deleteCell = newRow.insertCell();
-  
+
       //Create a delete button
       const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete'; // Set the text content of the delete button
-  
+      deleteBtn.textContent = 'Delete'; //Set the text content of the delete button
+      deleteBtn.classList.add('delete-btn'); //Add a class for styling the button
+
       //Add an event listener for the delete button to remove the expense
-      deleteBtn.classList.add('delete-btn'); //Add a class for styling
       deleteBtn.addEventListener('click', function() {
-          expenses.splice(expenses.indexOf(expense), 1); //Remove the expense from the array
-  
-          //Update the total amount after deletion
-          totalAmount -= expense.amount;
-          totalAmountCell.textContent = totalAmount; //Update the total amount cell in the table
-  
-          //Remove the row from the expenses table
-          expensesTableBody.removeChild(newRow);
+        expenses.splice(expenses.indexOf(expense), 1); //Remove the expense from the expenses array
+
+        //Update the total amount
+        totalExpense -= expense.amount;
+        totalExpenseCell.textContent = totalExpense.toFixed(2); //Update the total amount cell in the table, to point two decimal places
+        expensesTableBody.removeChild(newRow); //Remove the row from the expenses table
       });
-  
+
       //Set the text content of the cells with the expense data
       categoryCell.textContent = expense.category;
-      amountCell.textContent = expense.amount;
+      amountCell.textContent = expense.amount.toFixed(2);
       dateCell.textContent = expense.date;
       deleteCell.appendChild(deleteBtn); //Add the delete button to the delete cell
-  });
+    });
 
-  //Income:
-  let income = []; //Array to store the income added by the user
-  let totalIncome = 0; //Variable to store the total amount of all income
+    // Income Section
+    let income = [];  //Array to store the income added by the user
+    let totalIncome = 0; //Variable to store the total amount of all income
 
-  //Getting references to the DOM elements for user input and output
- </script>
+    //Getting references to the DOM elements for income input and output
+    const categorySelectIncome = document.getElementById('category-select-income'); //Income category dropdown
+    const amountInputIncome = document.getElementById('amount-input-income'); //Input field for income amount
+    const dateInputIncome = document.getElementById('date-input-income'); //Input field for income date
+    const addBtnIncome = document.getElementById('add-btn-income'); //Button to add a new income
+    const incomeTableBody = document.getElementById('income-table-body'); //Table body to display incomes
+    const totalIncomeCell = document.getElementById('total-income'); //Cell to display the total income
+
+    //Adding an event listener to the "add" button for income
+    addBtnIncome.addEventListener('click', function() {
+      const category = categorySelectIncome.value; //Get the selected income category from the dropdown
+      const amount = Number(amountInputIncome.value); //Get the income amount input and convert it to a number
+      const date = dateInputIncome.value; //Get the selected income date
+
+      //Validate user input for each field
+      if (category === '' || isNaN(amount) || amount <= 0 || date === '') {
+        alert('Please fill out all fields with valid values.');
+        return;
+      }
+
+      //Create an income object and add it to the income array
+      const incomeObj = { category, amount, date };
+      income.push(incomeObj);
+
+      //Update the total amount
+      totalIncome += amount;
+      totalIncomeCell.textContent = totalIncome.toFixed(2); //Update the total amount cell in the table, to point two decimal places
+
+      //Insert a new row in the income table
+      const newRow = incomeTableBody.insertRow();
+
+      //Insert cells in the new row
+      const categoryCell = newRow.insertCell();
+      const amountCell = newRow.insertCell();
+      const dateCell = newRow.insertCell();
+      const deleteCell = newRow.insertCell();
+
+      //Create a delete button
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete'; //Set the text content of the delete button
+      deleteBtn.classList.add('delete-btn'); //Add a class for styling the button
+
+      //Add an event listener for the delete button to remove the income
+      deleteBtn.addEventListener('click', function() {
+        income.splice(income.indexOf(incomeObj), 1); //Remove the income from the income array
+
+        //Update the total income after removing an income
+        totalIncome -= incomeObj.amount;
+        totalIncomeCell.textContent = totalIncome.toFixed(2); //Update the total amount cell in the table, to point two decimal places
+        incomeTableBody.removeChild(newRow); //Remove the row from the income table
+      });
+
+      //Set the text content of the cells with the income data
+      categoryCell.textContent = incomeObj.category;
+      amountCell.textContent = incomeObj.amount.toFixed(2);
+      dateCell.textContent = incomeObj.date;
+      deleteCell.appendChild(deleteBtn); //Add the delete button to the delete cell
+    });
+
+
+    //profit
+
+  </script>
 
 </body>
+
 </html>
