@@ -32,7 +32,7 @@ app.use(cookieParser()); //this is to make sure we can set up cookies in our bro
 
 //to render the html page
 app.get("/finance", (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'finance.html'));
+  res.sendFile(path.join(__dirname, 'public', 'finance.html'));
 })
 
 //telling nodejs what "view engine" we wanna use to show the HTML
