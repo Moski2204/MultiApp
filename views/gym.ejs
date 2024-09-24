@@ -49,6 +49,7 @@
           <th scope="col">Sets</th>
           <th scope="col">Reps</th>
           <th scope="col">Date</th>
+          <th scope="col">Delete</th> 
         </tr>
       </thead>
       <tbody>
@@ -61,6 +62,9 @@
                   <td><%= item.sets %></td>
                   <td><%= item.reps %></td>
                   <td><%= item.date %></td>
+                  <td>
+                    <a href="/gym/delete/<%= item.id %>" class="btn btn-danger btn-sm">Delete</a>
+                  </td>
               </tr>
           <% }); %>
       <% } else { %>
@@ -68,9 +72,7 @@
               <td colspan="4">No data available</td>
           </tr>
       <% } %>
-      
     </tbody>
     </table>
-    
 </body>
 </html>

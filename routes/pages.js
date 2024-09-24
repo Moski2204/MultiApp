@@ -77,4 +77,8 @@ router.get("/finance", authController.isLoggedIn, (req, res) => {
   }
 });
 */
+
+//to delete a workout from the table
+router.get('/gym/delete/:id', authController.isLoggedIn, authController.deleteWorkout);
+
 module.exports = router; //this is to make sure we can use the routes in other files, we need to export em that's what we doing in this line

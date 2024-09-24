@@ -201,3 +201,20 @@ exports.gym = (req, res) => {
         res.redirect('/gym');
     });
 }
+
+//Function to delete a workout
+exports.deleteWorkout = (req, res) => {
+  const workoutId = req.params.id; //Get the ID from the URL
+
+  //Query to delete the workout by its ID
+  const query = 'DELETE FROM gym2 WHERE id = ?';
+  
+  db.query(query, [workoutId], (err, result) => {
+      if (err) {
+          console.error('Error deleting workout:', err);
+          return res.status(500).send('Error deleting workout.');
+      }
+      console.log('Workout', workoutId, 'deleted successfully:', result);
+      res.redirect('/gym'); //Redirect back to the gym page after deletion
+  });
+};
