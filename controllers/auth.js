@@ -165,11 +165,11 @@ exports.isLoggedIn = async (req, res, next) => {
     } 
     catch (error) {
       console.error(error);
-      return next(); //if there is an error just go to the next thing
+      return res.redirect('/register'); //When the user logs out, the token is invalid and shows error, so then redirect to the register page
     }
   } 
   else{
-    next();
+    return res.redirect('/register'); //When the user has not logged in at all, then redirect them to the register page
   }
 }
 
